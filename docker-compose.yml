@@ -1,7 +1,8 @@
 version: '3.8'
 
 services:
-  frontend:
+  faxing-frontend:
+    container_name: faxing-frontend
     build: 
       context: ./frontend
       dockerfile: Dockerfile
@@ -13,9 +14,10 @@ services:
     environment:
       - NODE_ENV=development
     depends_on:
-      - backend
+      - faxing-backend
 
-  backend:
+  faxing-backend:
+    container_name: faxing-backend
     build:
       context: ./backend
       dockerfile: Dockerfile
@@ -24,6 +26,7 @@ services:
     volumes:
       - ./backend:/app
       - /app/node_modules
+      - ./results:/results
     environment:
       - NODE_ENV=development
       - PORT=8081 

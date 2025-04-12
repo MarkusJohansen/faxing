@@ -1,6 +1,7 @@
 {
-  "name": "beer-chugging-backend",
+  "name": "faxing-backend",
   "version": "1.0.0",
+  "description": "Backend for the Faxing game",
   "main": "index.js",
   "type": "module",
   "scripts": {

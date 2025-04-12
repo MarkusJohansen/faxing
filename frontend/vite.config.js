@@ -7,8 +7,9 @@ export default defineConfig({
     port: 8080,
     proxy: {
       '/api': {
-        target: 'http://backend:8081',
+        target: 'http://faxing-backend:8081',
         changeOrigin: true,
+        secure: false,
       },
     },
   },

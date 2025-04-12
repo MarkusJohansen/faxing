@@ -9,6 +9,7 @@
   background-color: transparent;
   overflow: hidden;
   position: relative;
+  --row-height: 3.2rem;
 }
 
 .dropdown-menu {
@@ -289,7 +290,7 @@
 
 .leaderboard-table tbody {
   display: block;
-  max-height: calc(3.2rem * 8); /* 8 rows, each 3.2rem high (padding included) */
+  max-height: calc(var(--row-height) * 8); /* 8 rows, each 3.2rem high (padding included) */
   overflow-y: auto;
 }
 

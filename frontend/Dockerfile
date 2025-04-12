@@ -1,5 +1,8 @@
 FROM node:18-alpine
 
+LABEL project="faxing"
+LABEL component="frontend"
+
 WORKDIR /app
 
 COPY package*.json ./

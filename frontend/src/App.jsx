@@ -1,16 +1,17 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
+import { GAME_CONFIG } from './config';
 import './App.css';
 
 function App() {
   const [countdown, setCountdown] = useState(() => {
     const saved = localStorage.getItem('countdown');
-    return saved ? parseInt(saved) : 10;
+    return saved ? parseInt(saved) : GAME_CONFIG.COUNTDOWN_SECONDS;
   });
   
   const [timeLeft, setTimeLeft] = useState(() => {
     const saved = localStorage.getItem('timeLeft');
-    return saved ? parseInt(saved) : 3600;
+    return saved ? parseInt(saved) : GAME_CONFIG.GAME_DURATION;
   });
   
   const [isRunning, setIsRunning] = useState(() => {
@@ -57,7 +58,7 @@ function App() {
       const startTime = localStorage.getItem('startTime');
       if (startTime) {
         const elapsed = Math.floor((Date.now() - parseInt(startTime)) / 1000);
-        const newTimeLeft = Math.max(3600 - elapsed, 0);
+        const newTimeLeft = Math.max(GAME_CONFIG.GAME_DURATION - elapsed, 0);
         setTimeLeft(newTimeLeft);
         if (newTimeLeft === 0) {
           setIsRunning(false);
@@ -103,9 +104,18 @@ function App() {
       }, 1000);
       return () => clearInterval(timer);
     } else if (timeLeft === 0 && isRunning) {
-      alarmAudio.current.play();
-      setIsRunning(false);
-      setIsGameOver(true);
+      const handleGameOver = async () => {
+        try {
+          alarmAudio.current.play();
+          setIsRunning(false);
+          setIsGameOver(true);
+          const response = await axios.post('/api/game-over');
+          console.log('Game over - Final leaderboard saved:', response.data.filename);
+        } catch (error) {
+          console.error('Error handling game over:', error);
+        }
+      };
+      handleGameOver();
     }
   }, [timeLeft, isRunning]);
 
@@ -113,7 +123,7 @@ function App() {
     const handleKeyPress = (e) => {
       if (e.code === 'Space' && isRunning && !isGameOver && !showNameInput) {
         e.preventDefault();
-        const currentTime = 3600 - timeLeft;
+        const currentTime = GAME_CONFIG.GAME_DURATION - timeLeft;
         setCurrentTime(currentTime);
         setShowNameInput(true);
       }
@@ -152,8 +162,8 @@ function App() {
       localStorage.clear();
       
       // Reset all state
-      setCountdown(10);
-      setTimeLeft(3600);
+      setCountdown(GAME_CONFIG.COUNTDOWN_SECONDS);
+      setTimeLeft(GAME_CONFIG.GAME_DURATION);
       setIsRunning(false);
       setIsGameOver(false);
       setShowNameInput(false);
