@@ -1,25 +1,40 @@
 .participant-view {
   min-height: 100vh;
-  padding: 2rem;
+  width: 100%;
   background-color: var(--faxe-dark);
-  color: var(--faxe-text);
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 2rem;
+}
+
+.hero-section {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 4rem 2rem;
+}
+
+.hero-content {
+  max-width: 800px;
+}
+
+.hero-logo {
+  width: 200px;
+  height: auto;
+  margin-bottom: 2rem;
+  filter: drop-shadow(0 0 20px rgba(221, 167, 79, 0.3));
 }
 
 .participant-view h1 {
-  color: var(--faxe-gold);
-  font-size: 2.5rem;
-  margin: 1rem 0 2rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-}
-
-.faxe-image {
-  width: 200px;
-  height: auto;
+  font-size: 4rem;
   margin-bottom: 1rem;
+  color: var(--faxe-gold);
+  text-transform: uppercase;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
 }
 
 .error-message {
@@ -29,13 +44,15 @@
   border-radius: 8px;
   margin: 1rem 0;
   text-align: center;
+  width: 100%;
+  max-width: 500px;
 }
 
 /* Waiting Screen */
 .waiting-screen {
   width: 100%;
-  max-width: 600px;
-  background-color: rgba(69, 123, 157, 0.1);
+  max-width: 500px;
+  background-color: rgba(45, 45, 45, 0.5);
   padding: 2rem;
   border-radius: 12px;
   text-align: center;
@@ -43,71 +60,145 @@
 
 .waiting-screen h2 {
   color: var(--faxe-gold);
+  font-size: 2rem;
   margin-bottom: 2rem;
-  font-size: 1.5rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
 }
 
 .game-info {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.info-card {
   background-color: rgba(69, 123, 157, 0.2);
   padding: 1.5rem;
   border-radius: 8px;
+  transition: all 0.2s ease;
 }
 
-.game-info p {
-  font-size: 1.2rem;
-  margin-bottom: 1.5rem;
-}
-
-.players-list h3 {
-  color: var(--faxe-gold);
-  margin-bottom: 1rem;
-}
-
-.player {
+.info-card:hover {
+  transform: translateY(-2px);
   background-color: rgba(69, 123, 157, 0.3);
-  padding: 0.75rem 1rem;
-  border-radius: 4px;
-  margin-bottom: 0.5rem;
-  transition: background-color 0.2s ease;
 }
 
-.player:hover {
-  background-color: rgba(69, 123, 157, 0.4);
+.info-card .label {
+  display: block;
+  color: var(--faxe-gold);
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  margin-bottom: 0.5rem;
+}
+
+.info-card .value {
+  display: block;
+  color: var(--faxe-text);
+  font-size: 2rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+.status-message {
+  background-color: rgba(69, 123, 157, 0.2);
+  padding: 1.5rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--faxe-text);
+  font-size: 1.2rem;
+}
+
+.status-icon {
+  width: 12px;
+  height: 12px;
+  background-color: var(--faxe-gold);
+  border-radius: 50%;
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(221, 167, 79, 0.7);
+  }
+  
+  70% {
+    transform: scale(1);
+    box-shadow: 0 0 0 10px rgba(221, 167, 79, 0);
+  }
+  
+  100% {
+    transform: scale(0.95);
+    box-shadow: 0 0 0 0 rgba(221, 167, 79, 0);
+  }
 }
 
 /* Countdown Screen */
 .countdown-screen {
-  width: 100%;
-  max-width: 400px;
-  margin: 2rem auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
 }
 
 /* Playing Screen */
 .playing-screen {
   width: 100%;
-  max-width: 400px;
-  margin: 2rem auto;
+  max-width: 800px;
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
 
 /* Completed Screen */
 .completed-screen {
   width: 100%;
   max-width: 800px;
-  margin: 2rem auto;
+  margin-top: 2rem;
+  background-color: rgba(45, 45, 45, 0.5);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.completed-screen h2 {
+  color: var(--faxe-gold);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  text-align: center;
+}
+
+.completed-time {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--faxe-text);
+  text-align: center;
+  margin: 2rem 0;
 }
 
 /* Game State Transitions */
-.participant-view.playing .faxe-image,
-.participant-view.completed .faxe-image {
+.participant-view.playing .hero-section,
+.participant-view.completed .hero-section {
+  padding: 2rem;
+}
+
+.participant-view.playing .hero-logo,
+.participant-view.completed .hero-logo {
   width: 100px;
-  position: absolute;
-  top: 1rem;
-  left: 1rem;
 }
 
 .participant-view.playing h1,
 .participant-view.completed h1 {
-  font-size: 1.5rem;
+  font-size: 2rem;
   margin: 0.5rem 0;
 }
 

@@ -5,7 +5,7 @@ import Timer from './components/Timer';
 import ScoreboardView from './components/ScoreboardView';
 
 function HostView({ gameId: initialGameId, onStartGame }) {
-  const [gameId, setGameId] = useState(initialGameId);
+  console.log('HostView rendered with gameId:', initialGameId);
   const [players, setPlayers] = useState([]);
   const [isGameStarted, setIsGameStarted] = useState(false);
   const [error, setError] = useState('');
@@ -14,9 +14,9 @@ function HostView({ gameId: initialGameId, onStartGame }) {
   useEffect(() => {
     // Set up polling for players
     const pollPlayers = setInterval(async () => {
-      if (gameId) {
+      if (initialGameId) {
         try {
-          const response = await axios.get(`/api/games/${gameId}/players`);
+          const response = await axios.get(`/api/games/${initialGameId}/players`);
           setPlayers(response.data);
         } catch (error) {
           console.error('Error fetching players:', error);
@@ -25,7 +25,7 @@ function HostView({ gameId: initialGameId, onStartGame }) {
     }, 2000);
 
     return () => clearInterval(pollPlayers);
-  }, [gameId, isGameStarted]);
+  }, [initialGameId, isGameStarted]);
 
   const handleStartGame = async () => {
     setShowCountdown(true);
@@ -34,7 +34,7 @@ function HostView({ gameId: initialGameId, onStartGame }) {
 
   const handleCountdownComplete = async () => {
     try {
-      await axios.post(`/api/games/${gameId}/start`);
+      await axios.post(`/api/games/${initialGameId}/start`);
       setIsGameStarted(true);
     } catch (error) {
       setError('Failed to start game. Please try again.');
@@ -43,9 +43,13 @@ function HostView({ gameId: initialGameId, onStartGame }) {
   };
 
   return (
-    <div className={`host-view ${isGameStarted ? 'game-started' : ''}`}>
-      <img src="/faxe-orden.png" alt="Faxe" className="faxe-image" />
-      <h1>Faxe Orden</h1>
+    <div className="host-view">
+      <div className="hero-section">
+        <div className="hero-content">
+          <img src="/faxe-orden.png" alt="Faxe Orden" className="hero-logo" />
+          <h1>Faxe Orden</h1>
+        </div>
+      </div>
       
       {error && <div className="error-message">{error}</div>}
 
@@ -53,7 +57,7 @@ function HostView({ gameId: initialGameId, onStartGame }) {
         <div className="pre-game">
           <div className="game-id-section">
             <h2>Faxe-ID</h2>
-            <div className="game-id">{gameId}</div>
+            <div className="game-id">{initialGameId}</div>
           </div>
 
           <div className="players-section">

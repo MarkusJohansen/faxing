@@ -216,6 +216,7 @@ function App() {
     try {
       const response = await axios.post('/api/games/create');
       if (response.data.gameId) {
+        console.log('Game created with ID:', response.data.gameId);
         setGameId(response.data.gameId);
         setPlayerName('host');
       }
@@ -227,6 +228,7 @@ function App() {
   };
 
   const handleJoinGame = (id, name) => {
+    console.log('Joining game with ID:', id, 'and name:', name);
     setGameId(id);
     setPlayerName(name);
     setHasStarted(false);  // Don't set hasStarted to true immediately
@@ -237,6 +239,7 @@ function App() {
   }
 
   if (role === 'host' && !hasStarted) {
+    console.log('Rendering HostView with gameId:', gameId);
     return <HostView gameId={gameId} onStartGame={handleStart} />;
   }
 

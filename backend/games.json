@@ -1,50 +1,30 @@
 {
-  "CWMVO3": {
-    "id": "CWMVO3",
+  "TU1BEK": {
+    "id": "TU1BEK",
     "players": [],
     "isStarted": false,
-    "createdAt": "2025-04-13T09:20:33.278Z"
+    "createdAt": "2025-04-13T09:50:34.769Z"
   },
-  "NJSKUI": {
-    "id": "NJSKUI",
+  "WDGQYX": {
+    "id": "WDGQYX",
     "players": [],
     "isStarted": false,
-    "createdAt": "2025-04-13T09:20:33.290Z"
+    "createdAt": "2025-04-13T09:50:34.779Z"
   },
-  "A4ZQK6": {
-    "id": "A4ZQK6",
+  "HCMIWF": {
+    "id": "HCMIWF",
     "players": [],
     "isStarted": false,
-    "createdAt": "2025-04-13T09:21:21.260Z"
+    "createdAt": "2025-04-13T09:51:55.859Z"
   },
-  "D38MZA": {
-    "id": "D38MZA",
-    "players": [],
+  "7C8D7V": {
+    "id": "7C8D7V",
+    "players": [
+      {
+        "name": "Markus"
+      }
+    ],
     "isStarted": false,
-    "createdAt": "2025-04-13T09:21:21.272Z"
-  },
-  "UHQBAI": {
-    "id": "UHQBAI",
-    "players": [],
-    "isStarted": false,
-    "createdAt": "2025-04-13T09:21:25.060Z"
-  },
-  "90R6OB": {
-    "id": "90R6OB",
-    "players": [],
-    "isStarted": false,
-    "createdAt": "2025-04-13T09:21:25.084Z"
-  },
-  "ORX2F2": {
-    "id": "ORX2F2",
-    "players": [],
-    "isStarted": false,
-    "createdAt": "2025-04-13T09:21:51.843Z"
-  },
-  "AL2TW8": {
-    "id": "AL2TW8",
-    "players": [],
-    "isStarted": false,
-    "createdAt": "2025-04-13T09:21:51.851Z"
+    "createdAt": "2025-04-13T09:51:55.870Z"
   }
 }
