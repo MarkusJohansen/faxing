@@ -1,4 +1,15 @@
 :root {
+  --faxe-red: #E63946;
+  --faxe-dark: #1D1D1D;
+  --faxe-gold: #DDA74F;
+  --faxe-text: #F1FAEE;
+  --faxe-accent: #457B9D;
+  
+  /* Additional shades */
+  --faxe-dark-lighter: #2D2D2D;
+  --faxe-gold-darker: #B88934;
+  --faxe-red-darker: #c4303c;
+
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
   font-weight: 400;
@@ -13,17 +24,124 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--faxe-dark);
+  color: var(--faxe-text);
   min-height: 100vh;
 }
 
 #root {
-  max-width: 1280px;
+  min-height: 100vh;
+  width: 100%;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--faxe-gold);
+  font-weight: bold;
+  letter-spacing: 1px;
+}
+
+button {
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.2s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+input {
+  background-color: rgba(69, 123, 157, 0.1);
+  border: 2px solid transparent;
+  border-radius: 8px;
+  color: var(--faxe-text);
+  font-size: 1rem;
+  padding: 0.75rem 1rem;
+  transition: all 0.2s ease;
+}
+
+input:focus {
+  outline: none;
+  border-color: var(--faxe-gold);
+  background-color: rgba(69, 123, 157, 0.2);
+}
+
+/* Common container styles */
+.container {
+  width: 100%;
+  max-width: 1400px;
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
+}
+
+/* Common card styles */
+.card {
+  background-color: var(--faxe-dark-lighter);
+  border-radius: 12px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Common button styles */
+.button-primary {
+  background-color: var(--faxe-red);
+  color: var(--faxe-text);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.button-primary:hover {
+  background-color: var(--faxe-red-darker);
+}
+
+.button-secondary {
+  background-color: var(--faxe-accent);
+  color: var(--faxe-text);
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+}
+
+.button-secondary:hover {
+  background-color: #3d6d8d;
+}
+
+/* Animation keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.5s ease forwards;
 } 

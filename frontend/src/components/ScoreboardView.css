@@ -1,0 +1,136 @@
+:root {
+  --faxe-red: #E63946;
+  --faxe-dark: #1D1D1D;
+  --faxe-gold: #DDA74F;
+  --faxe-text: #F1FAEE;
+  --faxe-accent: #457B9D;
+}
+
+.scoreboard-view {
+  background-color: var(--faxe-dark);
+  color: var(--faxe-text);
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.player-result {
+  background-color: var(--faxe-accent);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.player-result h2 {
+  color: var(--faxe-gold);
+  margin-bottom: 1rem;
+  font-size: 1.8rem;
+}
+
+.player-stats {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  font-size: 1.4rem;
+}
+
+.player-stats .position {
+  color: var(--faxe-gold);
+  font-weight: bold;
+}
+
+.scoreboard {
+  background-color: rgba(69, 123, 157, 0.1);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.scoreboard h2 {
+  color: var(--faxe-gold);
+  text-align: center;
+  margin-bottom: 1.5rem;
+  font-size: 1.8rem;
+}
+
+.scoreboard-header {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  color: var(--faxe-red);
+  border-bottom: 2px solid var(--faxe-accent);
+  margin-bottom: 0.5rem;
+}
+
+.player-list {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.player-row {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(69, 123, 157, 0.2);
+  transition: background-color 0.2s ease;
+}
+
+.player-row:hover {
+  background-color: rgba(69, 123, 157, 0.2);
+}
+
+.player-row.current-player {
+  background-color: rgba(230, 57, 70, 0.2);
+  font-weight: bold;
+}
+
+.position {
+  color: var(--faxe-gold);
+}
+
+.time {
+  color: var(--faxe-text);
+  text-align: right;
+}
+
+.host-controls {
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.reset-game-button {
+  background-color: var(--faxe-red);
+  color: var(--faxe-text);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.reset-game-button:hover {
+  background-color: #c4303c;
+}
+
+/* Scrollbar styling */
+.player-list::-webkit-scrollbar {
+  width: 8px;
+}
+
+.player-list::-webkit-scrollbar-track {
+  background: rgba(69, 123, 157, 0.1);
+  border-radius: 4px;
+}
+
+.player-list::-webkit-scrollbar-thumb {
+  background: var(--faxe-accent);
+  border-radius: 4px;
+}
+
+.player-list::-webkit-scrollbar-thumb:hover {
+  background: #3d6d8d;
+} 

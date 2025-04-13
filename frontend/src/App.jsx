@@ -1,9 +1,15 @@
 import { useState, useEffect, useRef } from 'react';
 import axios from 'axios';
 import { GAME_CONFIG } from './config';
+import LandingPage from './LandingPage';
+import HostView from './HostView';
+import ParticipantView from './ParticipantView';
 import './App.css';
 
 function App() {
+  const [role, setRole] = useState(null);
+  const [gameId, setGameId] = useState('');
+  const [playerName, setPlayerName] = useState('');
   const [countdown, setCountdown] = useState(() => {
     const saved = localStorage.getItem('countdown');
     return saved ? parseInt(saved) : GAME_CONFIG.COUNTDOWN_SECONDS;
@@ -170,6 +176,7 @@ function App() {
       setCurrentTime(null);
       setHasStarted(false);
       setParticipants([]);
+      setRole(null);
       
       // Force reload participants from server
       try {
@@ -197,6 +204,46 @@ function App() {
     setShowLeaderboard(prev => !prev);
   };
 
+  const handleRoleSelect = (selectedRole) => {
+    setRole(selectedRole);
+    if (selectedRole === 'host') {
+      // When selecting host role, create a new game
+      handleCreateGame();
+    }
+  };
+
+  const handleCreateGame = async () => {
+    try {
+      const response = await axios.post('/api/games/create');
+      if (response.data.gameId) {
+        setGameId(response.data.gameId);
+        setPlayerName('host');
+      }
+    } catch (error) {
+      console.error('Error creating game:', error);
+      // Reset role if game creation fails
+      setRole(null);
+    }
+  };
+
+  const handleJoinGame = (id, name) => {
+    setGameId(id);
+    setPlayerName(name);
+    setHasStarted(false);  // Don't set hasStarted to true immediately
+  };
+
+  if (!role) {
+    return <LandingPage onSelectRole={handleRoleSelect} onJoinGame={handleJoinGame} />;
+  }
+
+  if (role === 'host' && !hasStarted) {
+    return <HostView gameId={gameId} onStartGame={handleStart} />;
+  }
+
+  if (role === 'participant' && !hasStarted) {
+    return <ParticipantView gameId={gameId} playerId={playerName} />;
+  }
+
   return (
     <div className="app">
       {hasStarted && (
@@ -211,16 +258,6 @@ function App() {
       )}
       
       <div className="content-wrapper">
-        {!hasStarted && !isRunning && !isGameOver && (
-          <div className="start-section">
-            <img src="/faxe-orden.png" alt="Faxe" className="faxe-image" />
-            <button className="start-button" onClick={handleStart}>
-              La faxingen BEGYNNE
-            </button>
-            <img src="/faxe-orden.png" alt="Faxe" className="faxe-image" />
-          </div>
-        )}
-        
         {hasStarted && (
           <>
             <div className="game-section">
@@ -253,52 +290,35 @@ function App() {
                       </form>
                     </div>
                   )}
+                  
                   <div className="timer">{formatTime(timeLeft)}</div>
-                  <p>Press SPACE to log your time!</p>
                 </div>
               )}
-              
-              <img src="/faxe-orden.png" alt="Faxe" className="faxe-image" />
-            </div>
 
-            <button 
-              className="toggle-leaderboard-button"
-              onClick={toggleLeaderboard}
-            >
-              {showLeaderboard ? 'Hide' : 'Show'} Leaderboard
-            </button>
-
-            <div className={`leaderboard ${showLeaderboard ? 'visible' : ''}`}>
-              <h2>Leaderboard</h2>
-              <div className="leaderboard-wrapper">
-                <table className="leaderboard-table">
-                  <thead>
-                    <tr>
-                      <th className="position">Position</th>
-                      <th className="name">Name</th>
-                      <th className="time">Time</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {participants.map((participant, index) => (
-                      <tr key={index}>
-                        <td className="position">{index + 1}</td>
-                        <td className="name">{participant.name}</td>
-                        <td className="time">{formatTime(participant.time)}</td>
-                      </tr>
-                    ))}
-                  </tbody>
-                </table>
-              </div>
+              {isGameOver && (
+                <div className="game-over">
+                  <h2>Game Over!</h2>
+                  <button onClick={toggleLeaderboard}>
+                    {showLeaderboard ? 'Hide Leaderboard' : 'Show Leaderboard'}
+                  </button>
+                  {showLeaderboard && (
+                    <div className="leaderboard" ref={leaderboardRef}>
+                      <h3>Leaderboard</h3>
+                      <ol>
+                        {participants
+                          .sort((a, b) => a.time - b.time)
+                          .map((participant, index) => (
+                            <li key={index}>
+                              {participant.name}: {formatTime(participant.time)}
+                            </li>
+                          ))}
+                      </ol>
+                    </div>
+                  )}
+                </div>
+              )}
             </div>
           </>
-        )}
-
-        {isGameOver && (
-          <div className="game-over">
-            <h2>Game Over!</h2>
-            <p>Time's up! The contest has ended.</p>
-          </div>
         )}
       </div>
     </div>

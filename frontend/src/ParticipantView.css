@@ -1,0 +1,172 @@
+.participant-view {
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: var(--faxe-dark);
+  color: var(--faxe-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.participant-view h1 {
+  color: var(--faxe-gold);
+  font-size: 2.5rem;
+  margin: 1rem 0 2rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.faxe-image {
+  width: 200px;
+  height: auto;
+  margin-bottom: 1rem;
+}
+
+.error-message {
+  background-color: var(--faxe-red);
+  color: var(--faxe-text);
+  padding: 1rem;
+  border-radius: 8px;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+/* Waiting Screen */
+.waiting-screen {
+  width: 100%;
+  max-width: 600px;
+  background-color: rgba(69, 123, 157, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+  text-align: center;
+}
+
+.waiting-screen h2 {
+  color: var(--faxe-gold);
+  margin-bottom: 2rem;
+  font-size: 1.5rem;
+}
+
+.game-info {
+  background-color: rgba(69, 123, 157, 0.2);
+  padding: 1.5rem;
+  border-radius: 8px;
+}
+
+.game-info p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.players-list h3 {
+  color: var(--faxe-gold);
+  margin-bottom: 1rem;
+}
+
+.player {
+  background-color: rgba(69, 123, 157, 0.3);
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+  transition: background-color 0.2s ease;
+}
+
+.player:hover {
+  background-color: rgba(69, 123, 157, 0.4);
+}
+
+/* Countdown Screen */
+.countdown-screen {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+/* Playing Screen */
+.playing-screen {
+  width: 100%;
+  max-width: 400px;
+  margin: 2rem auto;
+}
+
+/* Completed Screen */
+.completed-screen {
+  width: 100%;
+  max-width: 800px;
+  margin: 2rem auto;
+}
+
+/* Game State Transitions */
+.participant-view.playing .faxe-image,
+.participant-view.completed .faxe-image {
+  width: 100px;
+  position: absolute;
+  top: 1rem;
+  left: 1rem;
+}
+
+.participant-view.playing h1,
+.participant-view.completed h1 {
+  font-size: 1.5rem;
+  margin: 0.5rem 0;
+}
+
+/* Join Form (keeping for reference) */
+.join-form {
+  width: 100%;
+  max-width: 400px;
+  background-color: rgba(69, 123, 157, 0.1);
+  padding: 2rem;
+  border-radius: 12px;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  color: var(--faxe-gold);
+  margin-bottom: 0.5rem;
+  font-size: 1.1rem;
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(69, 123, 157, 0.2);
+  color: var(--faxe-text);
+  font-size: 1rem;
+}
+
+.form-group input:focus {
+  outline: none;
+  background-color: rgba(69, 123, 157, 0.3);
+}
+
+.join-button {
+  width: 100%;
+  background-color: var(--faxe-red);
+  color: var(--faxe-text);
+  border: none;
+  padding: 1rem;
+  border-radius: 8px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-transform: uppercase;
+  font-weight: bold;
+}
+
+.join-button:hover:not(:disabled) {
+  background-color: #c4303c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.join-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+} 
